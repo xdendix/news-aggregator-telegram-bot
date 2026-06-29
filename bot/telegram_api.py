@@ -3,10 +3,14 @@ from .config import API_TOKEN
 
 
 # Fungsi untuk balas pesan ke Telegram
-def send_message(chat_id, message_text):
+def send_message(chat_id, message_text, reply_markup=None):
     url = f"https://api.telegram.org/bot{API_TOKEN}/sendMessage"
     # Payload (data yg dikirim ke server)
     payload = {"chat_id": chat_id, "text": message_text}
+
+    # masuk ke dalam payload
+    if reply_markup:
+        payload["reply_markup"] = reply_markup
 
     try:
         # Kasih timeout 10 detik untuk safety net kalao koneksi lemot,

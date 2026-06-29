@@ -24,7 +24,12 @@ def main():
             if data_bot.get("ok"):
                 for item in data_bot.get("result", []):
                     last_update_id = item["update_id"] + 1
+
+                    # Cek apakah ada pesan text biasa
                     message = item.get("message", {})
+
+                    # Cek apakah user klil tombol
+                    callback_query = item.get("callback_query")
 
                     if message:
                         # Ekstrak info penting
@@ -32,9 +37,27 @@ def main():
                         sender_name = message.get("from", {}).get("first_name", "User")
                         message_text = message.get("text", "")
 
-                        print(f"[{sender_name}]: {message_text}")
+                        print(f"[{sender_name}] typed: {message_text}")
 
+                        # Lempar teksnya ke otak (handlers.py)
                         process_message(chat_id, sender_name, message_text)
+
+                    elif callback_query:
+                        # lokasi chat_id kalau dari tombol agak masuk ke dalam
+                        chat_id = (
+                            callback_query.get("message", {}).get("chat", {}).get("id")
+                        )
+                        sender_name = callback_query.get("from", {}).get(
+                            "first_name", "User"
+                        )
+
+                        # tombol 'news_national' ada di key 'data'
+                        callback_data = callback_query.get("data", "")
+
+                        print(f" [{sender_name}] clicked button: {callback_data}")
+
+                        # lempar fungsi ke handlers.py
+                        process_message(chat_id, sender_name, callback_data)
 
         except requests.exceptions.Timeout:
             # Kalau 30 detik tidak ada chat, lanjut putaran
