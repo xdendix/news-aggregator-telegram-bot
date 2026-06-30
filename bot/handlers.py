@@ -35,5 +35,4 @@ def process_message(chat_id, sender_name, message_text):
         send_message(chat_id, news_result)
 
     else:
-        # Echo: Balas dengan membeo
         send_message(chat_id, f"Unrecognize command. Your typed: {message_text}")
