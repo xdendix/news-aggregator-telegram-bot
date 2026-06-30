@@ -14,15 +14,15 @@ def get_latest_news():
 
         # Cek status dari rss2json
         if json_data.get("status") != "ok":
-            return "API Error: Limit API habis atau server sedang down."
+            return "API Error: API limit exceeded or server is down."
 
         news_list = json_data.get("items", [])
 
         # Defensive Programming: cek apakah beritanya beneran ada
         if not news_list:
-            return "Tidak ada berita"
+            return "No news"
 
-        final_text = "BERITA TERBARU HARI INI:\n\n"
+        final_text = "LATEST NEWS TODAY:\n\n"
 
         # Bedah isi beritanya dengan looping
         for news in news_list[:4]:
