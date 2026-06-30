@@ -1,9 +1,15 @@
 import requests
 
 
-def get_latest_news():
-    # 1. Tembak URL yang aktif
-    url = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.cnnindonesia.com%2Fnasional%2Frss"
+def get_latest_news(category):
+    # Tembak URL yang aktif
+    rss_urls = {
+        "national": "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.cnnindonesia.com%2Fnasional%2Frss",
+        "tech": "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.cnnindonesia.com%2Fteknologi%2Frss",
+        "sports": "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.cnnindonesia.com%2Folahraga%2Frss",
+    }
+
+    url = rss_urls.get(category)
 
     try:
         response = requests.get(url, timeout=10)
@@ -22,7 +28,7 @@ def get_latest_news():
         if not news_list:
             return "No news"
 
-        final_text = "LATEST NEWS TODAY:\n\n"
+        final_text = f"LATEST {category.upper()} NEWS TODAY:\n\n"
 
         # Bedah isi beritanya dengan looping
         for news in news_list[:4]:
