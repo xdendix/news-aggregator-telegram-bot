@@ -23,8 +23,6 @@ A modern, real-time Telegram Bot that fetches and aggregates the latest national
 ![Bot Preview](./assets/bot_preview_2.png)
 ![Bot Preview](./assets/bot_preview_3.png)
 
-![Bot Preview](link_gambar_lu_disini)
-
 ## Project Structure
 
 ```text
