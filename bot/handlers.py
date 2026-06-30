@@ -35,4 +35,4 @@ def process_message(chat_id, sender_name, message_text):
         send_message(chat_id, news_result)
 
     else:
-        send_message(chat_id, f"Unrecognize command. Your typed: {message_text}")
+        send_message(chat_id, f"Just typing. Your typed: {message_text}")
