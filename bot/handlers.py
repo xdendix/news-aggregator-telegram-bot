@@ -1,5 +1,6 @@
+from .services.database import save_user
 from .telegram_api import send_message
-from services.news_fetcher import get_latest_news
+from bot.services.news_fetcher import get_latest_news
 
 
 def process_message(chat_id, sender_name, message_text):
@@ -8,7 +9,11 @@ def process_message(chat_id, sender_name, message_text):
 
     # Routing
     if command == "/start" or command == "/news" or command == "/berita":
-        reply = f"Hello {sender_name}! I am a News Aggregator Bot. Choose a category below:"
+        # simpan user di database
+        save_user(chat_id, sender_name)
+        reply = (
+            f"Hello {sender_name}! I am a News Aggregator Bot. Choose a category below:"
+        )
         # Rancang bentuk tombolnya (JSON Structure)
         # callback_data sebagai "kode rahasia" yang dikirim ke server saat tombol diklik
         keyboard = {

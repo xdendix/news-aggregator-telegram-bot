@@ -1,4 +1,5 @@
 import requests
+from .services.database import init_db
 import time  # library bawaan python untuk ngatur waktu
 from .config import API_TOKEN
 
@@ -10,6 +11,7 @@ def main():
     print("(Press CTRL+C on terminal for turn off bot)")
     update_url = f"https://api.telegram.org/bot{API_TOKEN}/getUpdates"
     last_update_id = None  # biar bot gak baca pesan berulang kali
+    init_db()  # panggil function db
 
     while True:
         try:
