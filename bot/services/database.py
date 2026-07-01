@@ -41,3 +41,18 @@ def save_user(chat_id, first_name):
         print(f"Database Error: {e}")
     finally:
         conn.close()
+
+
+def get_all_users():
+    conn = sqlite3.connect("bot_data.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""SELECT chat_id FROM users""")
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    # esktrak menjadi list biasa
+    user_ids = [row[0] for row in rows]
+
+    return user_ids
