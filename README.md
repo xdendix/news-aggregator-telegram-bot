@@ -1,23 +1,25 @@
 # Telegram News Aggregator Bot
 
-A modern, real-time Telegram Bot that fetches and aggregates the latest national, technology, and sports news. Built with Python, this project demonstrates industry-standard practices including modular architecture, REST API integration, SQLite database persistence, and an isolated administrative broadcast system.
+A modern, real-time Telegram Bot that fetches and aggregates the latest national and international news from RSS feeds. Built with Python, this project demonstrates modular architecture, Telegram API integration, SQLite persistence, and an admin broadcast capability.
 
 ## Features
 
-- **Real-time Updates:** Utilizes Telegram's Long Polling method to listen and respond to users instantly.
-- **Interactive & Dynamic UI/UX:** Replaces basic text commands with modern **Inline Keyboards** for seamless category selection.
-- **Dynamic API Routing:** Single-endpoint routing system that dynamically handles news categories (National, Tech, Sports) from external RSS-to-JSON APIs.
-- **Database Persistence (SQLite):** Automatically registers and stores unique user demographics securely without server-overhead dependencies.
-- **Admin Broadcast System:** Built-in administrative control layer that allows verified admins to send mass announcements to all registered users with block-safety execution.
-- **Defensive Programming:** Implemented robust exception handling to ensure continuous uptime during third-party API rate limits.
-- **Secure Configuration:** Protects sensitive credentials (`BOT_TOKEN` & `ADMIN_ID`) using environment variables.
+- **Real-time Updates:** Uses Telegram long polling to listen and respond to messages continuously.
+- **Menu-driven Navigation:** Supports `/start`, `/news`, and inline keyboard buttons for main menu, national news, and international news.
+- **Portal Selection:** Lets users choose from predefined news portals such as CNN Indonesia, Tempo, CNBC Indonesia, BBC World, Al Jazeera, and CNA Asia.
+- **RSS News Fetching:** Retrieves headlines from RSS feeds using `feedparser` and formats them into Telegram messages.
+- **Database Persistence:** Tracks unique users in a local SQLite database so admin broadcasts can reach registered users.
+- **Admin Broadcast System:** Admins can send a `/broadcast <message>` to push announcements to all stored users.
+- **Error Handling:** Includes retries and exception handling for network issues and Telegram API timeouts.
+- **Environment Configuration:** Uses `.env` variables for `BOT_TOKEN` and `ADMIN_ID`.
 
 ## Tech Stack
 
 - **Language:** Python 3.x
 - **Database:** SQLite3
-- **Libraries:** `requests`, `python-dotenv`
-- **API:** Telegram Bot API, RSS2JSON API
+- **Libraries:** `requests`, `python-dotenv`, `feedparser`
+- **API:** Telegram Bot API
+- **Test Framework:** `unittest`
 
 ## Preview
 
